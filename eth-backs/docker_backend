@@ -1,0 +1,28 @@
+FROM node:alpine
+
+WORKDIR /app
+
+#RUN apk update && apk upgrade && apk add --no-cache bash git openssh
+RUN apk add --no-cache  --repository http://dl-cdn.alpinelinux.org/alpine/edge/main --repository  http://dl-cdn.alpinelinux.org/alpine/edge/community  docker
+RUN apk update && apk upgrade && apk add --no-cache bash git openssh
+RUN apk update && apk add python3 && apk add icu-libs krb5-libs libgcc libintl libssl3 krb5-libs gcc make g++ krb5-dev
+RUN apk update
+RUN npm install -g npm@10.5.2
+RUN npm install "express" "cors" "fs-extra" "web3" "qrcode" "circular-json"
+ADD ./package.json .
+
+ADD . .
+
+#RUN node ./scripts/deploy.js
+
+#WORKDIR /app
+
+#RUN node ./server/routes/index.js
+
+#CMD ["tail", "-f", "/dev/null"]
+
+#CMD ["more","./receipt-gtr.json"]
+
+#RUN sleep 20
+
+CMD ["sh","-c", "node ./scripts/deploy.js && node ./server/routes/index.js"]

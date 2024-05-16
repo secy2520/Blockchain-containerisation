@@ -1,0 +1,36 @@
+pipeline {
+    agent any
+
+    tools {
+        git "Default"
+        nodejs 'nodejs'
+    }
+    environment {
+         DOCKER_GAN_NAME = 'ganache'
+         DOCKER_ETH_NAME = 'eth-backs'
+         DOCKER_FRONTEND = 'gan-frontend'
+         GITHUB_REPO_URL = 'https://github.com/Priyansuvaish/SPE-project.git'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                script {
+                    git branch: 'main', url: "${GITHUB_REPO_URL}"
+                }
+            }
+        }
+        stage('Build frontend code') {
+            steps {
+                script {
+                    dir("/var/lib/jenkins/workspace/eth-project/product-identification/") {
+                        sh 'npm install --force'
+                        // Run build without treating warnings as errors
+                        sh 'CI=false npm run build'
+                    }
+                }
+            }
+        }
+    }
+}
+

@@ -1,0 +1,10 @@
+FROM node:alpine
+
+WORKDIR /app
+
+RUN npm install -g ganache-cli
+
+RUN npm fund
+
+CMD ["ganache-cli", "-h", "0.0.0.0"]
+

@@ -1,0 +1,27 @@
+version: "3.8"
+services:
+  ganache:
+    image: secy2520/ganache
+    ports:
+      - '8545:8545'
+    healthcheck:
+      test: ["CMD", "true"]  # Dummy health check that always returns healthy
+
+  eth-back:
+    image: secy2520/eth-backs
+    ports:
+      - '4000:4000'
+    
+    depends_on: 
+      ganache:
+        condition: service_healthy  # Ensure Ganache is healthy before starting eth-back
+
+  frontend:
+    image: priyanshugupta753/build:latest
+    ports:
+      - '3000:3000'
+    depends_on:
+      - eth-back
+      - ganache
+    
+

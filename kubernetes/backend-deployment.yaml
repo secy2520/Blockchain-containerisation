@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-verification-backend
+spec:
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: secy2520/eths
+      - name: ganache
+        image: secy2520/ganache
+
+      - name: frontend
+        image: priyanshugupta753/product_verification:2
+        

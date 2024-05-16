@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-verification-frontend
+spec:
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: priyanshugupta753/product_verification:3
+        env:
+          - name: REACT_APP_LOCALHOST
+            value: "backend-service.public"
+        
