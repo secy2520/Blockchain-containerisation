@@ -1,7 +1,11 @@
-FROM node
+# Use Nginx image as a base image
+FROM nginx:alpine
 WORKDIR /app
-COPY package.json /app
-RUN npm install --force
-COPY . /app
+# Copy the built React app from the build folder to the Nginx web server directory
+COPY build /usr/share/nginx/html
 
-CMD [ "npm","start" ]
+# Expose port 80 to the outside world
+EXPOSE 80
+
+# Command to run the Nginx server
+CMD ["nginx", "-g", "daemon off;"]
