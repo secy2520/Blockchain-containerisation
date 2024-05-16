@@ -19,7 +19,7 @@ services:
   frontend:
     image: priyanshugupta753/build:latest
     ports:
-      - '3000:3000'
+      - '3000:80'
     depends_on:
       - eth-back
       - ganache
