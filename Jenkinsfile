@@ -5,7 +5,7 @@ pipeline {
         
         git "Default"
         nodejs 'nodejs'
-      // dockerTool 'dockeri'
+    
     }
     environment {
          DOCKER_GAN_NAME = 'ganache'
@@ -15,7 +15,7 @@ pipeline {
     }
 
     stages {
-          stage('Checkout') {
+        stage('Checkout') {
             steps {
                 script {
                     git branch: 'main', url: "${GITHUB_REPO_URL}"
@@ -39,36 +39,30 @@ pipeline {
                 }
             }
         }
-        /*stage('Build frontend code')
-        {
-            
+        stage('Building frontend code') {
             steps {
                 script {
-                dir("/var/lib/jenkins/workspace/eth-project/product-identification/") {
-                sh 'npm install'
-                sh 'npm run build ' 
+                    dir("/var/lib/jenkins/workspace/eth-project/product-identification/") {
+                        sh 'npm install --force'
+                        // Run build without treating warnings as errors
+                        sh 'CI=false npm run build'
+                    }
                 }
             }
         }
             
-            
-        }*/
-            
-       stage('Build and Test Backend code') {
+       stage('Building and Testing Backend code') {
             steps {
                 script {
                 dir("/var/lib/jenkins/workspace/eth-project/eth-backs/") {
-                
                 sh 'npx hardhat compile' 
-    
-               // sh 'docker --version'
                 }
             }
         }
         }
 
         
-        /*stage('Build Docker Image for the ganache Blockchain') {
+        stage('Build Docker Image for the ganache Blockchain') {
             steps {
                 script {
                     // Build Docker image                   
@@ -82,7 +76,6 @@ pipeline {
                 script {
                     // Build Docker image
                        dir("/var/lib/jenkins/workspace/eth-project/eth-backs/") {
-                    //sh 'docker build -t eth-backs -f /var/lib/jenkins/workspace/eth-project/eth-backs/docker_backend .'
                     docker.build("${DOCKER_ETH_NAME}", '-f /var/lib/jenkins/workspace/eth-project/eth-backs/docker_backend .')
                        }
                 }
@@ -99,7 +92,16 @@ pipeline {
                     }
                  }
             }
-        }*/
+        }
+        stage('Removing all present images and the containers ') {
+            steps {
+                script{
+                   
+                   sh 'docker system prune -f'
+                   
+                 }
+            }
+        }
         stage('Run Ansible Playbook') {
             steps {
                 script {
