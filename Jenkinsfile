@@ -44,7 +44,7 @@ pipeline {
                 script {
                     dir("/var/lib/jenkins/workspace/eth-project/product-identification/") {
                         sh 'npm install --force'
-                        // Run build without treating warnings as errors
+                        
                         sh 'CI=false npm run build'
                     }
                 }
@@ -60,7 +60,15 @@ pipeline {
             }
         }
         }
-
+          stage('Building Docker Image for the frontend ') {
+            steps {
+                script {
+                    // Build Docker image                   
+                    docker.build("${DOCKER_FRONTEND}", '-f /var/lib/jenkins/workspace/eth-project/product-identification/Dockerfile .')
+                    // }
+                }
+            }
+        }
         
         stage('Build Docker Image for the ganache Blockchain') {
             steps {
@@ -87,6 +95,8 @@ pipeline {
                     docker.withRegistry('', 'docker') {
                     sh 'docker tag eth-backs secy2520/eth-backs:latest'
                     sh 'docker tag ganache secy2520/ganache:latest'
+                    sh 'docker tag gan-frontend secy2520/gan-frontend:latest'
+                    sh 'docker push secy2520/gan-frontend'
                     sh 'docker push secy2520/eth-backs'
                     sh 'docker push secy2520/ganache'
                     }
