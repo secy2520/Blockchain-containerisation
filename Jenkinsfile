@@ -11,7 +11,7 @@ pipeline {
          DOCKER_GAN_NAME = 'ganache'
          DOCKER_ETH_NAME = 'eth-backs'
          DOCKER_FRONTEND = 'gan-frontend'
-         GITHUB_REPO_URL = 'https://github.com/Priyansuvaish/SPE-project.git'
+         GITHUB_REPO_URL = 'https://github.com/Priyansuvaish/SPE.git'
     }
 
     stages {
