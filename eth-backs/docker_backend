@@ -10,8 +10,7 @@ RUN apk update
 RUN npm install -g npm@10.5.2
 RUN npm install "express" "cors" "fs-extra" "web3" "qrcode" "circular-json"
 ADD ./server/ .
-ADD ./artifacts .
-
+ADD ./artifacts/ .
 ADD ./scripts/ .
 
 CMD ["sh","-c", "node ./scripts/deploy.js && node ./server/routes/index.js"]
