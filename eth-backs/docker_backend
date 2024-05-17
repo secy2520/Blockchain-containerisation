@@ -13,15 +13,13 @@ ADD ./package.json .
 
 ADD . .
 
-#RUN node ./scripts/deploy.js
 
-#WORKDIR /app
+
+
 
 #RUN node ./server/routes/index.js
 
-#CMD ["tail", "-f", "/dev/null"]
 
-#CMD ["more","./receipt-gtr.json"]
 
 #RUN sleep 20
 
