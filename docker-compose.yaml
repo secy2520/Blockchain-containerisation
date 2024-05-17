@@ -17,7 +17,7 @@ services:
         condition: service_healthy  # Ensure Ganache is healthy before starting eth-back
 
   frontend:
-    image: secy2520/gan-fronted
+    image: secy2520/gan-frontend
     ports:
       - '3000:80'
     depends_on:
