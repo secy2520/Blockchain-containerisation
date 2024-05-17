@@ -61,9 +61,10 @@ pipeline {
           stage('Building Docker Image for the frontend ') {
             steps {
                 script {
-                    // Build Docker image                   
+                    // Build Docker image   
+                    dir("/var/lib/jenkins/workspace/eth-project/product-identification/") {
                     docker.build("${DOCKER_FRONTEND}", '-f /var/lib/jenkins/workspace/eth-project/product-identification/Dockerfile .')
-                    // }
+                     }
                 }
             }
         }
