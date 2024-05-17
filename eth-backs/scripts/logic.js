@@ -7,7 +7,6 @@
     const getContractObject = () => {
 
         const contractReceipt = require("../receipt-gtr.json");
-
         // Create a contract object/instance 
         const contractObject = new web3.eth.Contract(
             compileContract.abi,
@@ -45,8 +44,7 @@
             "mumbai",
             "gujrat"
 
-        ).send({gas: 3000000,gasPrice: 10000000, from:accounts[1]}); 
-
+        ).send({gas: 3000000,gasPrice: 10000000, from:accounts[1]});
         console.log(cds);
     };
 
