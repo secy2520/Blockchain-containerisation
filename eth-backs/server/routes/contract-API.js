@@ -1,4 +1,6 @@
+const express = require("express");
 const router = express.Router();
+
 //const compile = require("../../Fake-prodcut-identification-smart-contract/scripts/compile");
 //const deploy = require("../../scripts/deploy");
 const get_addr = require("../../receipt-gtr.json");
@@ -29,4 +31,5 @@ router.get("/acc_addr", async function(req, res, next) {
     }
 });
 module.exports = router;
+
 
