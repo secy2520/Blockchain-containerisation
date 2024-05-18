@@ -1,6 +1,6 @@
 - name: Run Docker Compose script
   hosts: localhost
-  become: yes
+ # become: yes
   tasks:
     - name: Start Docker Compose services
       shell: docker-compose up
