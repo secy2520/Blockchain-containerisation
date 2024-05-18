@@ -9,8 +9,8 @@ RUN apk update && apk add python3 && apk add icu-libs krb5-libs libgcc libintl l
 RUN apk update
 RUN npm install -g npm@10.5.2
 RUN npm install "express" "cors" "fs-extra" "web3" "qrcode" "circular-json"
-ADD ./server/ .
-ADD ./artifacts/ .
-ADD ./scripts/ .
+ADD ./server ./server
+ADD ./artifacts ./artifacts
+ADD ./scripts ./scripts
 
 CMD ["sh","-c", "node ./scripts/deploy.js && node ./server/routes/index.js"]
