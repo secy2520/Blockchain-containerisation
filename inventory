@@ -1,1 +1,1 @@
-localhost ansible_connection=local ansible_python_interpreter=/usr/bin/python3 ansible_user=parallels ansible_password=parallels ansible_become=true ansible_become_method=sudo ansible_become_pass=parallels
+localhost ansible_connection=local ansible_python_interpreter=/usr/bin/python3 ansible_user=root
