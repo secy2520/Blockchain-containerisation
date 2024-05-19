@@ -3,6 +3,6 @@
  # become: yes
   tasks:
     - name: Start Docker Compose services
-      shell: docker-compose up -d
+      shell: docker-compose up 
       args:
         chdir: /var/lib/jenkins/workspace/eth-project/
